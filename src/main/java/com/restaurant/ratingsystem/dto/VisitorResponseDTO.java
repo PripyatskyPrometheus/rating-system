@@ -7,5 +7,3 @@ public record VisitorResponseDTO(
     String gender
 ) 
 {}
-    
-

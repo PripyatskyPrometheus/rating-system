@@ -8,6 +8,5 @@ public record RestaurantResponseDTO(
     String description,
     String typeCuisine,
     int aveCheck,
-    BigDecimal userRating  
-) 
-{}
+    BigDecimal userRating
+) {}
