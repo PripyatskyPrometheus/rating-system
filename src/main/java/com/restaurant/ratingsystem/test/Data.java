@@ -1,5 +1,9 @@
 package com.restaurant.ratingsystem.test;
 
+
+import com.restaurant.ratingsystem.dto.RatingRequestDTO;
+import com.restaurant.ratingsystem.dto.RestaurantRequestDTO;
+import com.restaurant.ratingsystem.dto.VisitorRequestDTO;
 import com.restaurant.ratingsystem.service.RatingVisitorService;
 import com.restaurant.ratingsystem.service.RestaurantService;
 import com.restaurant.ratingsystem.service.VisitorService;
@@ -20,28 +24,45 @@ public class Data {
 
     @PostConstruct
     public void loadData() {
+        VisitorRequestDTO request1 = new VisitorRequestDTO("Леонид Брежнев", 75, "Мужской");
+        VisitorRequestDTO request2 = new VisitorRequestDTO("Индира Ганди", 66, "Женский");
+        VisitorRequestDTO request3 = new VisitorRequestDTO("Маргарет Тэтчер",   87, "Женский");
+        VisitorRequestDTO request4 = new VisitorRequestDTO(null, 21, "Мужской");
 
-        Long visitor1 = visitorService.saveVisitor("Леонид Брежнев", 75, "Мужской").getId();
-        Long visitor2 = visitorService.saveVisitor("Индира Ганди", 66, "Женский").getId();
-        Long visitor3 = visitorService.saveVisitor("Маргарет Тэтчер", 87, "Женский").getId();
-        Long visitor4 = visitorService.saveVisitor(null, 21, "Мужской").getId();
+        Long visitor1 = visitorService.saveVisitor(request1).id();
+        Long visitor2 = visitorService.saveVisitor(request2).id();
+        Long visitor3 = visitorService.saveVisitor(request3).id();
+        Long visitor4 = visitorService.saveVisitor(request4).id();
 
-        Long restaurant1 = restaurantService.saveRestaurant("В гостях у Джованни", 
-        "Вкуснейшая паста и превосходное вино", "Итальянская", 2000).getId();
-        
-        Long restaurant2 = restaurantService.saveRestaurant(
-            "Сытый азиатский дракон", "Если вы любите острый ощущения - мы вам рады", 
-            "Корейская", 1200).getId();
+        RestaurantRequestDTO restaurantRequest1 = new RestaurantRequestDTO(
+            "В гостях у Джованни", 
+            "Вкуснейшая паста и превосходное вино", 
+            "Итальянская", 
+            2000);
 
-        ratingVisitorService.addRating(visitor1, restaurant1, 5, "Еда вкуснейшая!");
-        ratingVisitorService.addRating(visitor2, restaurant1, 4, "Отличное вино");
-        ratingVisitorService.addRating(visitor3, restaurant1, 3, "Я в вохищении от этого места");
-        
-        ratingVisitorService.addRating(visitor4, restaurant2, 2, "Еда очень острая. Прямо огонь!");
-        ratingVisitorService.addRating(visitor1, restaurant2, 5, "Очень рекомендую здешние роллы");
+        RestaurantRequestDTO restaurantRequest2 = new RestaurantRequestDTO(
+            "Сытый азиатский дракон",
+            "Если вы любите острый ощущения - мы вам рады", 
+            "Корейская",
+            1200);
 
-        ratingVisitorService.addRating(visitor2, restaurant1, 5, 
-        "Прекрасное заведение! Еда -вкуснейшая. Персонал - чуткий и расторопный");
+        Long restaurant1 = restaurantService.saveRestaurant(restaurantRequest1).id();
+        Long restaurant2 = restaurantService.saveRestaurant(restaurantRequest2).id();
+
+        RatingRequestDTO ratingRequest1 = new RatingRequestDTO(visitor1, restaurant1, 5, "Еда вкуснейшая!");
+        RatingRequestDTO ratingRequest2 = new RatingRequestDTO(visitor2, restaurant1, 4, "Отличное вино");
+        RatingRequestDTO ratingRequest3 = new RatingRequestDTO(visitor3, restaurant1, 3, "Я в вохищении от этого места");
+        RatingRequestDTO ratingRequest4 = new RatingRequestDTO(visitor4, restaurant2, 2, "Еда очень острая. Прямо огонь!");
+        RatingRequestDTO ratingRequest5 = new RatingRequestDTO(visitor1, restaurant2, 5, "Очень рекомендую здешние роллы");
+        RatingRequestDTO ratingRequest6 = new RatingRequestDTO(visitor2, restaurant1, 5, 
+            "Прекрасное заведение! Еда -вкуснейшая. Персонал - чуткий и расторопный");
+
+        ratingVisitorService.addRating(ratingRequest1);
+        ratingVisitorService.addRating(ratingRequest2);
+        ratingVisitorService.addRating(ratingRequest3);
+        ratingVisitorService.addRating(ratingRequest4);
+        ratingVisitorService.addRating(ratingRequest5);
+        ratingVisitorService.addRating(ratingRequest6);
 
         System.out.println("Данные добавлены");
     }

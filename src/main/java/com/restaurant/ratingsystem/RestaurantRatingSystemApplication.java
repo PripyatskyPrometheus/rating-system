@@ -27,11 +27,11 @@ public class RestaurantRatingSystemApplication implements CommandLineRunner {
         
         System.out.println("Посетители:");
         visitorService.getAllVisitors().forEach(v -> 
-            System.out.println("	" + v.getName() + " - " + v.getAge()));
+            System.out.println("	" + v.name() + " - " + v.age()));
         
         System.out.println("\nРестораны:");
         restaurantService.getAllRestaurants().forEach(r -> 
-            System.out.println("	" + r.getName() + ": " + r.getUserRating() + "/5"));
+            System.out.println("	" + r.name() + ": " + r.userRating() + "/5"));
 
         System.out.println("Тестирование успешно завершено! Приложение работает исправно!");
     }
