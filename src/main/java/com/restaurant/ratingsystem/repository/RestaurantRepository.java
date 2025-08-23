@@ -2,10 +2,11 @@ package com.restaurant.ratingsystem.repository;
 
 import com.restaurant.ratingsystem.entity.Restaurant;
 import org.springframework.stereotype.Repository;
-
-import java.util.*;
+import org.springframework.data.jpa.repository.JpaRepository;
 
 @Repository
+public interface RestaurantRepository extends JpaRepository<Restaurant, Long> {}
+/* 
 public class RestaurantRepository {
     private final List<Restaurant> restaurants = new ArrayList<>();
     private long nextId = 0;
@@ -31,3 +32,4 @@ public class RestaurantRepository {
                 .findFirst();
     }
 }
+*/

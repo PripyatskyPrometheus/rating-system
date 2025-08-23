@@ -4,12 +4,16 @@ import com.restaurant.ratingsystem.entity.Restaurant;
 import com.restaurant.ratingsystem.dto.RestaurantResponseDTO;
 import com.restaurant.ratingsystem.dto.RestaurantRequestDTO;
 import com.restaurant.ratingsystem.repository.RestaurantRepository;
+
+import jakarta.transaction.Transactional;
+
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 import java.util.*;
 
 @Service
+@Transactional
 public class RestaurantService {
     private final RestaurantRepository restaurantRepository;
 
@@ -23,19 +27,18 @@ public class RestaurantService {
     //}
 
     public RestaurantResponseDTO saveRestaurant(RestaurantRequestDTO restaurantRequestDTO) {
-        Restaurant restaurant = new Restaurant(
-            null, 
-            restaurantRequestDTO.name(), 
-            restaurantRequestDTO.description(), 
-            restaurantRequestDTO.typeCuisine(), 
-            restaurantRequestDTO.aveCheck(), 
-            BigDecimal.ZERO);
+        Restaurant restaurant = new Restaurant();
+        restaurant.setName(restaurantRequestDTO.name());
+        restaurant.setDescription(restaurantRequestDTO.description());
+        restaurant.setTypeCuisine(restaurantRequestDTO.typeCuisine());
+        restaurant.setAveCheck(restaurantRequestDTO.aveCheck());
+        restaurant.setUserRating(BigDecimal.ZERO);
         restaurant = restaurantRepository.save(restaurant);
         return convertToResponse(restaurant);
     }
 
     public void removeRestaurant(Long id) {
-        restaurantRepository.remove(id);
+        restaurantRepository.deleteById(id);
     }
 
     // public List<Restaurant> getAllRestaurants() {
