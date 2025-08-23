@@ -24,12 +24,12 @@ public class RatingController {
     public RatingResponseDTO addRating(@RequestBody RatingRequestDTO request) {
         return ratingVisitorService.addRating(request);
     }
-
-    @PostMapping
+    /*@PostMapping
     @Operation(summary = "Добавить новую оценку")
     public RatingResponseDTO createRating(@RequestBody RatingRequestDTO request) {
         return ratingVisitorService.addRating(request);
-    }
+    } */
+    
     
     @GetMapping
     @Operation(summary = "Получить все оценки")
