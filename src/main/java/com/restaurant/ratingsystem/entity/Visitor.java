@@ -1,11 +1,29 @@
 package com.restaurant.ratingsystem.entity;
 
-public class Visitor {
-    private Long id;
-    private String name;
-    private int age;
-    private String gender;
+import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
+@Data
+@Entity
+@NoArgsConstructor
+@AllArgsConstructor
+@Table(name="Visitors")
+public class Visitor {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @Column(nullable = true)
+    private String name;
+
+    @Column(nullable = false)
+    private int age;
+
+    @Column(nullable = false)
+    private String gender;
+    /*
     public Visitor(Long id, String name, int age, String gender) {
         this.id = id;
         this.name = name;
@@ -44,4 +62,5 @@ public class Visitor {
     public void setGender(String gender) {
         this.gender = gender;
     }
+    */
 }

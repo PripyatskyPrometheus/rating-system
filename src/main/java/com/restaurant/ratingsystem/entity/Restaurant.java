@@ -1,15 +1,34 @@
 package com.restaurant.ratingsystem.entity;
 
+import jakarta.persistence.*;
+import lombok.*;
 import java.math.*;
 
+@Data
+@Entity
+@NoArgsConstructor
+@AllArgsConstructor
+@Table(name="Restaurants")
 public class Restaurant {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String name;
-    private String description;
-    private String typeCuisine;
-    private int aveCheck;
-    private BigDecimal userRating;
 
+    @Column(nullable = false)
+    private String name;
+
+    @Column(columnDefinition = "TEXT", nullable = false)
+    private String description;
+
+    @Column(nullable = false)
+    private String typeCuisine;
+
+    @Column(name = "average_check", nullable = false)
+    private int aveCheck;
+
+    @Column(name = "user_rating", precision = 3, scale = 2)
+    private BigDecimal userRating;
+    /*
     public Restaurant(Long id, String name, String description, String typeCuisine, int aveCheck, BigDecimal userRating) {
         this.id = id;
         this.name = name;
@@ -66,4 +85,5 @@ public class Restaurant {
     public void setUserRating(BigDecimal userRating){
         this.userRating = userRating;
     }
+        */
 }

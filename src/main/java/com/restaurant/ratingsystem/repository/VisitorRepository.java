@@ -1,12 +1,13 @@
 package com.restaurant.ratingsystem.repository;
 
 import com.restaurant.ratingsystem.entity.Visitor;
+
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import java.util.*;
-
 @Repository
-public class VisitorRepository {
+public interface VisitorRepository extends JpaRepository<Visitor, Long> {}
+/*public class VisitorRepository {
     private final List<Visitor> visitors = new ArrayList<>();
     private long nextId = 0;
 
@@ -24,4 +25,4 @@ public class VisitorRepository {
     public List<Visitor> findAll() {
         return new ArrayList<>(visitors);
     }
-}
+} */

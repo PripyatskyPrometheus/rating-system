@@ -1,12 +1,33 @@
 package com.restaurant.ratingsystem.entity;
 
+import jakarta.persistence.*;
+import lombok.*;
+
+@Data
+@Entity
+@NoArgsConstructor
+@AllArgsConstructor
+@Table(name="Rating_Visitor")
 public class RatingVisitor {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
-    Long idVisitor;
-    Long idRestaurant;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "visitor_id", nullable = false)
+    Visitor visitor;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "restaurant_id", nullable = false)
+    Restaurant restaurant;
+
+    @Column(nullable = false)
     int rating;
+
+    @Column(columnDefinition = "TEXT", nullable = false)
     String textReview;
 
+    /*
     public RatingVisitor(Long id, Long idVisitor, Long idRestaurant, int rating, String textReview) {
         this.id = id;
         this.idVisitor = idVisitor;
@@ -53,5 +74,5 @@ public class RatingVisitor {
 
     public void setTextReview(String textReview){
         this.textReview = textReview;
-    }
+    } */
 }
