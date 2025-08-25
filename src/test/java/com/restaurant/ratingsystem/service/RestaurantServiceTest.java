@@ -64,4 +64,11 @@ public class RestaurantServiceTest {
 
         assertEquals("Ресторан не найден", exception.getMessage());
     }
+
+    @Test
+    void deleteRestaurant_ShouldCallDeleteById() {
+        Long restaurantIdToDelete = 1L;
+        restaurantService.removeRestaurant(restaurantIdToDelete);
+        verify(restauranRepository, times(1)).deleteById(restaurantIdToDelete);
+    }
 }
